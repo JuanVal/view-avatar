@@ -17,7 +17,7 @@ class ListAvatars extends HTMLElement {
       <section class="container-list"></section>
       <aside class="navegacion__paginacion">
         <button id="btnPrev" type="button">Previous</button>
-        <strong>Page: </strong><span class="numero__pagina"></span>
+        <strong class="page">Page</strong><span class="numero__pagina"></span>
         <button id="btnNext" type="button">Next</button>
       </aside>
     `;
@@ -131,6 +131,27 @@ class ListAvatars extends HTMLElement {
         transition: transform .6s ease;
         transform-origin: center;
         transform: rotate(360deg)
+      }
+      .page{
+        color: orange;
+        font-weight: 800;
+      }
+      .numero__pagina{
+        color: red;
+        font-weight: 800;
+      }
+      button{
+        padding: .2em;
+        font-weight: 800;
+        color: skyblue;
+        background-color: whitesmoke;
+        border: 1px solid skyblue;
+        cursor: pointer;
+      }
+      button:hover{
+        color: white;
+        background-color: skyblue;
+        border: 1px solid gray;
       }
     `;
   }
