@@ -122,6 +122,7 @@ class ListAvatars extends HTMLElement {
         padding: 1rem;
         border: 5px solid white;
         border-radius: 6px;
+        margin: 0 1rem;
       }
       .avatar{
         cursor: pointer;
