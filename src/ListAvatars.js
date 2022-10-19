@@ -120,7 +120,7 @@ class ListAvatars extends HTMLElement {
         flex-direction: row;
         justify-content: space-between;
         padding: 1rem;
-        border: 5px solid white;
+        border: 1px solid white;
         border-radius: 6px;
         margin: 0 1rem;
       }
