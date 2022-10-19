@@ -62,6 +62,19 @@ class ViewAvatar extends HTMLElement {
       .click__animate{
         font-we
       }
+      button{
+        padding: .2em;
+        font-weight: 800;
+        color: darkred;
+        background-color: whitesmoke;
+        border: 1px solid skyblue;
+        cursor: pointer;
+      }
+      button:hover{
+        color: whitesmoke;
+        background-color: skyblue;
+        border: 1px solid gray;
+      }
       @keyframes flotar {
         0% {
           transform: translateY(-24px);
