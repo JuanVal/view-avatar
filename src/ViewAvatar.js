@@ -21,7 +21,7 @@ class ViewAvatar extends HTMLElement {
     this.shadowRoot.innerHTML = /*html*/ `
       <style>${ViewAvatar.styles}</style>
      
-       <img src="${this.avatar}" alt="Selected avatar" width="120">
+       <img class="avatar" src="${this.avatar}" alt="Selected avatar" width="120">
         <h2>${this.title}</h2>
     
     `;
