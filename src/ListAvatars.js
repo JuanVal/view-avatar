@@ -137,7 +137,7 @@ class ListAvatars extends HTMLElement {
         font-weight: 800;
       }
       .numero__pagina{
-        color: red;
+     
         font-weight: 800;
       }
       button{
