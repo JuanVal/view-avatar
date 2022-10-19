@@ -1,7 +1,7 @@
 import avatares from "./avatares.json";
 
 class ListAvatars extends HTMLElement {
-  title = "Display Avatars";
+  title = "Avatars";
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -16,9 +16,9 @@ class ListAvatars extends HTMLElement {
       <h2>${this.title}</h2>
       <section class="container-list"></section>
       <aside class="navegacion__paginacion">
-        <button id="btnNext" type="button">Next</button>
-        <strong>Página: </strong><span class="numero__pagina"></span>
         <button id="btnPrev" type="button">Previous</button>
+        <strong>Page: </strong><span class="numero__pagina"></span>
+        <button id="btnNext" type="button">Next</button>
       </aside>
     `;
   }

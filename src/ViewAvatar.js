@@ -1,7 +1,9 @@
+import avatares from "./avatares.json";
 class ViewAvatar extends HTMLElement {
-  title = "Display Avatar";
+  title = "Your pick";
   avatar = "";
   activateanimation = false;
+  yourPick = false;
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -27,8 +29,10 @@ class ViewAvatar extends HTMLElement {
     this.shadowRoot.innerHTML = /*html*/ `
       <style>${ViewAvatar.styles}</style> 
         
-        <img class="avatar" src="${this.avatar}" alt="Selected avatar" width="120">
-        <h2>${this.title}</h2>
+        <img class="avatar" src="${
+          !this.avatar ? avatares.data[11].url : this.avatar
+        }" alt="Selected avatar" width="120">
+        <h2>${this.avatar ? this.title : "Pick default"}</h2>
         <button class="click__animate">Animate</button>
     
     `;
