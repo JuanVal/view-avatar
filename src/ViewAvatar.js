@@ -50,12 +50,11 @@ class ViewAvatar extends HTMLElement {
         display: flex;
         flex-direction: column;
         align-items: center;
-     
         gap: 1rem;
         padding: 2rem;
       }
       .avatar{
-        transform: translateY(-12px);
+        transform: translateY(-24px);
       }
       .activated{
         animation: flotar 1s alternate infinite;

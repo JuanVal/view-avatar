@@ -35,7 +35,7 @@ class PickAvatar extends HTMLElement {
         gap: 1rem;
         padding: 2rem;
         max-width: 375px;
-    
+        padding: 1rem;
         margin: 20px auto;
         background-color: #ccc6;
       }

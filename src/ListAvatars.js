@@ -120,7 +120,8 @@ class ListAvatars extends HTMLElement {
         flex-direction: row;
         justify-content: space-between;
         padding: 1rem;
-        border: 2px solid gray;
+        border: 5px solid white;
+        border-radius: 6px;
       }
       .avatar{
         cursor: pointer;
