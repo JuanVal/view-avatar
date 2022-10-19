@@ -97,7 +97,7 @@ class ListAvatars extends HTMLElement {
     return /*css*/ `
     :host{
         display: grid;
-        border: 2px solid gray;
+       
     }
       .container-list{
         display: grid;
@@ -106,7 +106,6 @@ class ListAvatars extends HTMLElement {
         align-items: start;
         gap: 1rem 3px;
         padding: 1rem;
-      
         border-radius: 8px;
         min-height: 10em;
       }
@@ -121,7 +120,7 @@ class ListAvatars extends HTMLElement {
         flex-direction: row;
         justify-content: space-between;
         padding: 1rem;
-        border-top: 2px solid gray;
+        border: 2px solid gray;
       }
       .avatar{
         cursor: pointer;
