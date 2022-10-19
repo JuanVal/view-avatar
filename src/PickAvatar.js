@@ -16,7 +16,7 @@ class PickAvatar extends HTMLElement {
     this.shadowRoot.innerHTML = /*html*/ `
       <style>${PickAvatar.styles}</style>
       <slot></slot>
-      <view-avatar avatar="${avatares.data[0].url}"></view-avatar>
+      <view-avatar activateanimation="false" avatar="${avatares.data[0].url}"></view-avatar>
     `;
   }
   getSelectedAvatar(event) {

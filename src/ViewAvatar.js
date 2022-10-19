@@ -1,6 +1,7 @@
 class ViewAvatar extends HTMLElement {
   title = "Display Avatar";
   avatar = "";
+  activateanimation = false;
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -13,18 +14,31 @@ class ViewAvatar extends HTMLElement {
     if (attr === "avatar") {
       this.avatar = now;
     }
+    if (attr === "activateAnimation") {
+      if (now === "false") this.activateanimation = false;
+      if (now === "true") this.activateanimation = true;
+      console.log(this.activateanimation);
+    }
   }
   static get observedAttributes() {
-    return ["avatar"];
+    return ["avatar", "activateanimation"];
   }
   render() {
     this.shadowRoot.innerHTML = /*html*/ `
-      <style>${ViewAvatar.styles}</style>
-     
-       <img class="avatar" src="${this.avatar}" alt="Selected avatar" width="120">
-        <h2>${this.title}</h2>
+      <style>${ViewAvatar.styles}</style> 
+        
+        <img class="${
+          !this.activateanimation ? "avatar " : "avatar activated"
+        }" src="${this.avatar}" alt="Selected avatar" width="120">
+        <h2>${this.title} ${this.activateanimation}</h2>
+        <button class="click__animate">Animate</button>
     
     `;
+    this.shadowRoot
+      .querySelector(".click__animate")
+      .addEventListener("click", () => {
+        this.shadowRoot.querySelector(".avatar").classList.toggle("activated");
+      });
   }
 
   static get styles() {
@@ -37,6 +51,26 @@ class ViewAvatar extends HTMLElement {
         border: 2px solid gray;
         gap: 1rem;
         padding: 2rem;
+      }
+      .avatar{
+        transform: translateY(-12px);
+      }
+      .activated{
+        animation: flotar 1s alternate infinite;
+      }
+      @keyframes flotar {
+        0% {
+          transform: translateY(-24px);
+          animation-timing-function: ease-in;
+          opacity: 1;
+        }
+       
+       
+        100% {
+          transform: translateY(-20px);
+          animation-timing-function: ease-out;
+          opacity: 1;
+        }
       }
     `;
   }
