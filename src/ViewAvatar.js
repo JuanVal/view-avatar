@@ -59,9 +59,7 @@ class ViewAvatar extends HTMLElement {
       .activated{
         animation: flotar 1s alternate infinite;
       }
-      .click__animate{
-        font-we
-      }
+     
       button{
         padding: .2em;
         font-weight: 800;
@@ -71,7 +69,7 @@ class ViewAvatar extends HTMLElement {
         cursor: pointer;
       }
       button:hover{
-        color: whitesmoke;
+        color: white;
         background-color: skyblue;
         border: 1px solid gray;
       }
