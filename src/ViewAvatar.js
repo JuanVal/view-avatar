@@ -27,10 +27,8 @@ class ViewAvatar extends HTMLElement {
     this.shadowRoot.innerHTML = /*html*/ `
       <style>${ViewAvatar.styles}</style> 
         
-        <img class="${
-          !this.activateanimation ? "avatar " : "avatar activated"
-        }" src="${this.avatar}" alt="Selected avatar" width="120">
-        <h2>${this.title} ${this.activateanimation}</h2>
+        <img class="avatar" src="${this.avatar}" alt="Selected avatar" width="120">
+        <h2>${this.title}</h2>
         <button class="click__animate">Animate</button>
     
     `;
