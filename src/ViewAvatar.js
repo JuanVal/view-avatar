@@ -56,6 +56,9 @@ class ViewAvatar extends HTMLElement {
       .activated{
         animation: flotar 1s alternate infinite;
       }
+      .click__animate{
+        font-we
+      }
       @keyframes flotar {
         0% {
           transform: translateY(-24px);
