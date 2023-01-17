@@ -2,6 +2,9 @@ import avatares from "./avatares.json";
 
 class ListAvatars extends HTMLElement {
   title = "Avatars";
+  $ = (selector) => this.shadowRoot.querySelector(selector);
+  obj_per_page = 10;
+  current_page = 1;
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -11,7 +14,8 @@ class ListAvatars extends HTMLElement {
     this.renderAvatars();
   }
   render() {
-    this.shadowRoot.innerHTML = /*html*/ `
+    try{
+      this.shadowRoot.innerHTML = /*html*/ `
       <style>${ListAvatars.styles}</style>
       <h2>${this.title}</h2>
       <section class="container-list"></section>
@@ -21,77 +25,100 @@ class ListAvatars extends HTMLElement {
         <button id="btnNext" type="button">Next</button>
       </aside>
     `;
+    }catch(error){
+      this.shadowRoot.innerHTML =/*HTML*/ `${error.message}`;
+    }
   }
-  async renderAvatars() {
+ 
+ renderAvatars() {
     try {
-      const $ = (selector) => this.shadowRoot.querySelector(selector);
-      let current_page = 1;
-      let obj_per_page = 10;
-      const btn_next = $("#btnNext");
-      const btn_prev = $("#btnPrev");
-      const listing_table = $(".container-list");
-      const page_span = $(".numero__pagina");
+      
+      const btn_next = this.$("#btnNext");
+      const btn_prev =  this.$("#btnPrev");
+      
+      this.changePage(this.current_page);
 
-      function totNumPages() {
-        return Math.ceil(avatares.data.length / obj_per_page);
-      }
-
-      function prevPage() {
-        if (current_page > 1) {
-          current_page--;
-          change(current_page);
-        }
-      }
-      function nextPage() {
-        if (current_page < totNumPages()) {
-          current_page++;
-          change(current_page);
-        }
-      }
-
-      function change(page) {
-        if (page < 1) page = 1;
-        if (page > totNumPages()) page = totNumPages();
-        listing_table.innerHTML = "";
-        for (let i = (page - 1) * obj_per_page; i < page * obj_per_page; i++) {
-          if (avatares.data[i]) {
-            listing_table.innerHTML += /*html*/ `
-            <img class="avatar" src=${avatares.data[i].url} alt="" width="48"/>
-          `;
-          }
-        }
-        const allAvatars = listing_table.querySelectorAll(".avatar");
-        allAvatars.forEach((element) => {
-          element.addEventListener("click", (e) => {
-            e.target.dispatchEvent(
-              new CustomEvent("pick-avatar", {
-                bubbles: true,
-                composed: true,
-                detail: {
-                  url: e.target.src,
-                },
-              })
-            );
-          });
-        });
-        page_span.innerHTML = page;
-        if (page === 1) {
-          btn_prev.style.visibility = "hidden";
-        } else {
-          btn_prev.style.visibility = "visible";
-        }
-        if (page === totNumPages()) {
-          btn_next.style.visibility = "hidden";
-        } else {
-          btn_next.style.visibility = "visible";
-        }
-      }
-      change(current_page);
-      btn_next.addEventListener("click", () => nextPage());
-      btn_prev.addEventListener("click", () => prevPage());
+      btn_next.addEventListener("click", this.nextPage.bind(this));
+      btn_prev.addEventListener("click", this.prevPage.bind(this));
     } catch (error) {
       this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
     }
+  }
+  prevPage() {
+    try {
+      if (this.current_page > 1) {
+        this.current_page--;
+        this.changePage(this.current_page);
+      }
+    } catch (error) {
+      this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
+    }
+  }
+  nextPage() {
+    try {
+      if (this.current_page < this.totNumPages()) {
+        this.current_page++;
+        this.changePage(this.current_page);
+      }
+    } catch (error) {
+      this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
+    }
+  }
+  totNumPages() {
+   try{
+      return Math.ceil(avatares.data.length /  this.obj_per_page);
+   }catch(error){
+     this.shadowRoot.innerHTML = /*HTML*/ `${error.message}`;
+   }
+  }
+  changePage(page) {
+   try{
+    const listing_table =  this.$(".container-list");
+    
+    if (page < 1) page = 1;
+    if (page > this.totNumPages()) page = this.totNumPages();
+    listing_table.innerHTML = "";
+    for (let i = (page - 1) * this.obj_per_page; i < page * this.obj_per_page; i++) {
+      if (avatares.data[i]) {
+        listing_table.innerHTML += /*html*/ `
+        <img class="avatar" src=${avatares.data[i].url} alt="" width="48"/>
+      `;
+      }
+    }
+
+    const allAvatars = listing_table.querySelectorAll(".avatar");
+    allAvatars.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        e.target.dispatchEvent(
+          new CustomEvent("pick-avatar", {
+            bubbles: true,
+            composed: true,
+            detail: {
+              url: e.target.src,
+            },
+          })
+        );
+      });
+    });
+
+    const page_span =  this.$(".numero__pagina");
+    const btn_next = this.$("#btnNext");
+    const btn_prev =  this.$("#btnPrev");
+
+    page_span.innerHTML = page;
+    if (page === 1) {
+      btn_prev.style.visibility = "hidden";
+    } else {
+      btn_prev.style.visibility = "visible";
+    }
+    if (page === this.totNumPages()) {
+      btn_next.style.visibility = "hidden";
+    } else {
+      btn_next.style.visibility = "visible";
+    }
+   }catch(error){
+     this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
+   }
   }
   static get styles() {
     return /*css*/ `
