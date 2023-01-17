@@ -3,11 +3,14 @@ import avatares from "./avatares.json";
 class ListAvatars extends HTMLElement {
   title = "Avatars";
   $ = (selector) => this.shadowRoot.querySelector(selector);
-  obj_per_page = 10;
-  current_page = 1;
+ 
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    obj_per_page = 10;
+    current_page = 1;
+    btn_next = this.$("#btnNext");
+    btn_prev =  this.$("#btnPrev");
   }
   connectedCallback() {
     this.render();
@@ -33,13 +36,12 @@ class ListAvatars extends HTMLElement {
  renderAvatars() {
     try {
       
-      const btn_next = this.$("#btnNext");
-      const btn_prev =  this.$("#btnPrev");
+      
       
       this.changePage(this.current_page);
 
-      btn_next.addEventListener("click", this.nextPage.bind(this));
-      btn_prev.addEventListener("click", this.prevPage.bind(this));
+      this.btn_next.addEventListener("click", this.nextPage.bind(this));
+      this.btn_prev.addEventListener("click", this.prevPage.bind(this));
     } catch (error) {
       this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
     }
@@ -107,14 +109,14 @@ class ListAvatars extends HTMLElement {
 
     page_span.innerHTML = page;
     if (page === 1) {
-      btn_prev.style.visibility = "hidden";
+      this.btn_prev.style.visibility = "hidden";
     } else {
-      btn_prev.style.visibility = "visible";
+      this.btn_prev.style.visibility = "visible";
     }
     if (page === this.totNumPages()) {
-      btn_next.style.visibility = "hidden";
+      this.btn_next.style.visibility = "hidden";
     } else {
-      btn_next.style.visibility = "visible";
+      this.btn_next.style.visibility = "visible";
     }
    }catch(error){
      this.shadowRoot.innerHTML += /*html*/ `<pre>${error.message}</pre>`;
